@@ -1,0 +1,18 @@
+import cv2
+cap=cv2.VideoCapture(0) #captures video
+fourcc=cv2.VideoWriter_fourcc(*'XVID') # to capture and save video
+out=cv2.VideoWriter("output.avi",fourcc,20.0,(640,480)) #it give the number of frames and of defined size of frame
+print(cap.isOpened())
+while(cap.isOpened()):
+    ret,frame=cap.read()
+    if ret==True:
+        print(cap.get(cv2.CAP_PROP_FRAME_WIDTH)) #prop to read width of frame
+        print(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))#prop to read heigh of frame
+        out.write(frame)
+        cv2.imshow("frame",frame)
+        if cv2.waitKey(1) & 0XFF==ord('q'):
+            break
+    else:
+        break
+cap.release()
+out.release()
